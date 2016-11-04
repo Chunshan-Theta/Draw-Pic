@@ -85,6 +85,11 @@
                     $(this).children("div").css("width").replace("px", "");
  
             }).eq(3).click();
+			
+			document.body.addEventListener('touchmove', function (e) {
+				e.preventDefault();
+			}, false);
+
             //取得canvas context
             var $canvas1 = document.getElementById("cSketchPad");
             var $canvas = $("#cSketchPad");
@@ -94,7 +99,7 @@
             ctx.fillRect(0, 0, $canvas.width(), $canvas.height());
             var drawMode = false;
             //canvas點選、移動、放開按鍵事件時進行繪圖動作
-
+			
             $canvas1.addEventListener("mousedown", function (e) {
                     ctx.beginPath();
                     ctx.strokeStyle = p_color;
@@ -111,24 +116,36 @@
             $canvas1.addEventListener("mouseup", function (e) {
                     drawMode = false;
             }, false);
-            $canvas1.addEventListener("touchstart", function (e) {
-                    ctx.beginPath();
+			
+	        $canvas1.addEventListener('touchstart', function(e) {
                     ctx.strokeStyle = p_color;
                     ctx.lineWidth = p_width;
-                    ctx.moveTo(e.pageX - $canvas.position().left, e.pageY - $canvas.position().top);
-                    drawMode = true;
+
             }, false);
             $canvas1.addEventListener("touchmove", function (e) {
-                    if (drawMode) {
-                    ctx.lineTo(e.pageX - $canvas.position().left, e.pageY - $canvas.position().top);
-                    ctx.stroke();
-                    }
-            }, false);
-            $canvas1.addEventListener("touchend", function (e) {
-                    drawMode = false;
-            }, false);
-   
-        });
+                    var touches = e.touches;
+				//如果是剛下筆(手)，會先初始化起始點
+				if( pp[0] == -1 && pp[1] == -1 ){ 
+					pp = [touches[0].pageX,touches[0].pageY]; 
+				}
+				//紀錄下一點的位置
+				np = [touches[0].pageX,touches[0].pageY];
+				
+				//繪圖
+				ctx.beginPath();
+				ctx.moveTo(pp[0], pp[1]);
+				ctx.lineTo(np[0],np[1]);
+				ctx.closePath();
+				ctx.stroke();
+				//下一點的位置=新的起始點
+				pp[0] = np[0];
+				pp[1] = np[1];
+			}, false);
+			$canvas1.addEventListener("touchend", function (e) {
+				//起始點歸零
+				pp = [-1,-1];
+			}, false);
+			 });
     </script>
     <script>
     function DisWhite() {
