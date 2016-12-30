@@ -96,7 +96,6 @@
 			document.body.addEventListener('touchmove', function (e) {
 				e.preventDefault();
 			}, false);
-
             //取得canvas context
             var $canvas1 = document.getElementById("cSketchPad");
             var $canvas = $("#cSketchPad");
@@ -128,7 +127,6 @@
                     ctx.strokeStyle = p_color;
                     ctx.lineWidth = p_width;
 					pp = [-1,-1];
-
             }, false);
             $canvas1.addEventListener("touchmove", function (e) {
                 var touches = e.touches;
@@ -182,7 +180,7 @@
             var c = document.getElementById("cSketchPad");
             var ctx = c.getContext("2d");
             var img = document.getElementById("scream");
-			ctx.drawImage(img,0,0,img.width,img.height,0,0,window.innerWidth*0.9,window.innerHeight*0.5);
+			ctx.drawImage(img,0,0,img.width,img.height,0,0,w,h);
             var img = document.getElementById("OutImg");
             ctx.drawImage(img, 0, 0);
             Out2img();
@@ -199,11 +197,12 @@
                 $("<img />", { src: document.getElementById("cSketchPad").toDataURL(),
                     "class": "output","ID":"OutImg"
                 }));                
-    }  
+    }
+    var w =  window.innerWidth*0.8;
+    var h =  window.innerWidth*1.6;  
     window.onload = function() {
         SetC3(false); 
-		var w =  window.innerWidth*0.9;
-		var h =  window.innerHeight*0.5;
+		
 		var canvas = document.getElementById('cSketchPad'),context = canvas.getContext('2d');		
 		
 		// resize the canvas to fill browser window dynamically
@@ -211,7 +210,6 @@
 		function resizeCanvas() {
 				canvas.width = w;
 				canvas.height = h;
-
 				/**
 				 * Your drawings need to be inside this function otherwise they will be reset when 
 				 * you resize the browser window and the canvas goes will be cleared.
