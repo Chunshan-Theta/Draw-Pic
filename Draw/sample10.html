@@ -2,7 +2,7 @@
  
 <html>
 <head>
-    <title>HTML5 Canvas塗鴉板</title>
+    <title>批改</title>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.4.js"></script>
     
     <style>
@@ -58,8 +58,8 @@
 </div>
 <!--script-->
 <script>
-	//畫框大小
-	var w =  window.innerWidth*0.8;
+		//畫框大小
+		var w =  window.innerWidth*0.8;
         var h =  window.innerWidth*1.6; 
         $(function () {
             //產生不同顏色的div方格當作調色盤選項
@@ -144,12 +144,15 @@
             }, false);
             $canvas1.addEventListener("touchmove", function (e) {
                 var touches = e.touches;
+				//修正觸控偏移
+				var ad_x = 30;
+				var ad_y = 100;
 				//如果是剛下筆(手)，會先初始化起始點
 				if( pp[0] == -1 && pp[1] == -1 ){ 
-					pp = [touches[0].pageX,touches[0].pageY]; 
+					pp = [touches[0].clientX-ad_x,touches[0].clientY-ad_y]; 
 				}
 				//紀錄下一點的位置
-				np = [touches[0].pageX,touches[0].pageY];
+				np = [touches[0].clientX-ad_x,touches[0].clientY-ad_y];
 				
 				//繪圖
 				ctx.beginPath();
