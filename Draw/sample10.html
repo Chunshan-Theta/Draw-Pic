@@ -58,8 +58,8 @@
 </div>
 <!--script-->
 <script>
-		//畫框大小
-		var w =  window.innerWidth*0.8;
+	//畫框大小
+	var w =  window.innerWidth*0.8;
         var h =  window.innerWidth*1.6; 
         $(function () {
             //產生不同顏色的div方格當作調色盤選項
@@ -128,22 +128,21 @@
             }, false);
 			
 			
-			var LockView = function (e) { 
+		var LockView = function (e) { 
 				//鎖定螢幕
 　　　			e.preventDefault(); 
 			}
 			
 			
 	        $canvas1.addEventListener('touchstart', function(e) {
-					//鎖定螢幕
-					document.addEventListener('touchstart',LockView,false);
-                    
-					ctx.strokeStyle = p_color;
-                    ctx.lineWidth = p_width;
-					pp = [-1,-1];
+			//鎖定螢幕
+			document.addEventListener('touchstart',LockView,false);                    
+			ctx.strokeStyle = p_color;
+                	ctx.lineWidth = p_width;
+			pp = [-1,-1];
             }, false);
-            $canvas1.addEventListener("touchmove", function (e) {
-                var touches = e.touches;
+            	$canvas1.addEventListener("touchmove", function (e) {
+                		var touches = e.touches;
 				//修正觸控偏移
 				var ad_x = 30;
 				var ad_y = 100;
