@@ -39,7 +39,6 @@ sample7.html
 
 	- like sample6.html but could draw on mobile drvice(touch)
 	
-sample10.html
-sample10_2.html
+sample10.html & sample10_2.html
 
-	- now they will adjust canvas's width and height according to drvice
+	- now they will adjust canvas's width and height according to device
